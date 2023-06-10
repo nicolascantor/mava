@@ -20,10 +20,10 @@ return new class extends Migration
             $table->string('celular');
             $table->string('email');
             $table->enum('tipo_documento', ['ti', 'cc', 'ce','pa']);
-            $table->string('numero_documento')->unique();
+            $table->string('numero_documento');
             $table->string('password');
             $table->unsignedBigInteger('sede_id');
-            $table->foreign('user_id')->references('id')->on('sedes');
+            $table->foreign('sede_id')->references('id')->on('sedes');
             $table->timestamps();
 
             $table->unique(['numero_documento']);

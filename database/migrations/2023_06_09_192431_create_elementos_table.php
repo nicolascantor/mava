@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('elementos', function (Blueprint $table) {
             $table->id();
+            $table->string('referencia');
+            $table->string('nombre');
+            $table->string('unidad_medida');
+            $table->double('valor_venta_publico', 15, 2);
+            $table->double('valor_venta_sede', 15, 2);
             $table->timestamps();
         });
     }

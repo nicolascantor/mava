@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('pedido_has_elementos', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('pedido_id');
+            $table->foreign('pedido_id')->references('id')->on('pedidos');
+            $table->unsignedBigInteger('elemento_id');
+            $table->foreign('elemento_id')->references('id')->on('elementos');
+            $table->double('cantidad', 10, 2);
             $table->timestamps();
         });
     }
