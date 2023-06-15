@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Sede extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['nombre','direccion','telefono','ciudad','regimen_simplificado_id'];
 }

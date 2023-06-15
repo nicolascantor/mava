@@ -35,15 +35,17 @@
         <!-- Tipo Documento -->
         <div class="mt-4">
             <x-input-label for="tipo_documento" :value="__('Tipo de documento')" />
-            <x-select-input id="tipo_documento" class="block mt-1 w-full" type="text" name="tipo_documento" :value="old('tipo_documento')" required autocomplete="tipo_documento" />
+            <x-select-input id="tipo_documento" class="block mt-1 w-full" type="text" name="tipo_documento"
+             :options="['ti'=>'Tarjeta de identidad','cc'=>'Cedula de Ciudadania','ce'=>'Cedula de Extranjeria', 'pa'=>'Pasaporte']"
+             :value="old('tipo_documento')" required autocomplete="tipo_documento" />
             <x-input-error :messages="$errors->get('tipo_documento')" class="mt-2" />
         </div>
 
         <!-- Numero Documento -->
         <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <x-input-label for="numero_documento" :value="__('Numero de Documento')" />
+            <x-text-input id="numero_documento" class="block mt-1 w-full" type="text" name="numero_documento" :value="old('numero_documento')" required autocomplete="numero_documento" />
+            <x-input-error :messages="$errors->get('numero_documento')" class="mt-2" />
         </div>
 
         <!-- Password -->

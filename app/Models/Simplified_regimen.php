@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Simplified_regimen extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['nombre', 'nit'];
 }
