@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('simplified_regimens', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->string('nit');
+            $table->string('nit')->unique();;
             $table->timestamps();
         });
     }

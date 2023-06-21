@@ -17,7 +17,7 @@ class RegimenSimplificadoController extends Controller
     public function index()
     {
         $regimenes_simplificados = Simplified_regimen::all();
-        return view('regimenes-simplificados', ['regimenes_simplificados'=>$regimenes_simplificados]);
+        return view('configsystem.regimenes-simplificados', ['regimenes_simplificados'=>$regimenes_simplificados]);
     }
 
     /**
@@ -40,7 +40,7 @@ class RegimenSimplificadoController extends Controller
     {
         $request->validate([
             'nombre' => ['required','string'],
-            'nit' => ['required','string']
+            'nit' => ['required','string','unique:simplified_regimens,nit']
         ]);
 
         $new_rs = new Simplified_regimen;

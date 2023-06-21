@@ -17,9 +17,9 @@
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <x-primary-butto>
-                {{ __('Crear Sede') }}
-            </x-primary-butto>
+            <x-primary-button>
+                {{ __('Crear') }}
+            </x-primary-button>
         </div>
     </form>
 </x-guest-layout>
