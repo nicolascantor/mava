@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\View\View;
+use App\Models\Sede;
+use App\Models\Simplified_regimen;
+use Illuminate\Http\RedirectResponse;
 
 class SedeController extends Controller
 {
@@ -11,9 +15,11 @@ class SedeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): view
     {
-        //
+        $sedes = Sede::all();
+        return view('configsystem.sedes', ['sedes' => $sedes]);
+
     }
 
     /**
@@ -21,9 +27,10 @@ class SedeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): view
     {
-        //
+        $regimenes_simplificados = Simplified_regimen::all();
+        return view('configsystem.create-sede', ['regimenes_simplificados'=>$regimenes_simplificados]);
     }
 
     /**
@@ -34,7 +41,24 @@ class SedeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => ['required','string'],
+            'direccion' => ['required','string'],
+            'telefono' => ['required','string'],
+            'ciudad' => ['required','string'],
+            'regimen_simplificado' => ['required']
+        ]);
+
+        $new_sede = new Sede;
+        $new_sede->nombre = $request->nombre;
+        $new_sede->direccion = $request->direccion;
+        $new_sede->telefono = $request->telefono;
+        $new_sede->ciudad = $request->ciudad;
+        $new_sede->regimen_simplificado_id = $request->regimen_simplificado;
+        $new_sede->save();
+
+        return redirect('/sedes');
+
     }
 
     /**

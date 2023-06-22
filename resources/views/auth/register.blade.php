@@ -26,18 +26,20 @@
         <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" >
-                {{ '' }}
-            </x-text-input>
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <!-- Tipo Documento -->
         <div class="mt-4">
             <x-input-label for="tipo_documento" :value="__('Tipo de documento')" />
-            <x-select-input id="tipo_documento" class="block mt-1 w-full" type="text" name="tipo_documento"
-             :options="['ti'=>'Tarjeta de identidad','cc'=>'Cedula de Ciudadania','ce'=>'Cedula de Extranjeria', 'pa'=>'Pasaporte']"
-             :value="old('tipo_documento')" required autocomplete="tipo_documento" />
+            <select name="tipo_documento" id="tipo_documento" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                <option disabled selected>Seleccione una opción</option>
+                <option value="ti">Tarjeta de identidad</option>
+                <option value="cc">Cedula de Ciudadania</option>
+                <option value="ce">Cedula de Extranjeria</option>
+                <option value="pa">Pasaporte</option>
+            </select>
             <x-input-error :messages="$errors->get('tipo_documento')" class="mt-2" />
         </div>
 
@@ -46,6 +48,18 @@
             <x-input-label for="numero_documento" :value="__('Numero de Documento')" />
             <x-text-input id="numero_documento" class="block mt-1 w-full" type="text" name="numero_documento" :value="old('numero_documento')" required autocomplete="numero_documento" />
             <x-input-error :messages="$errors->get('numero_documento')" class="mt-2" />
+        </div>
+
+        <!-- sede -->
+        <div class="mt-4">
+            <x-input-label for="sede" :value="__('sede')" />
+            <select name="sede_id" id="sede" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                <option disabled selected>Seleccione una opción</option>
+                @foreach ($sedes as $sede)
+                    <option value="{{ $sede->id }}">{{ $sede->nombre }}</option>
+                @endforeach
+            </select>
+            <x-input-error :messages="$errors->get('sede')" class="mt-2" />
         </div>
 
         <!-- Password -->

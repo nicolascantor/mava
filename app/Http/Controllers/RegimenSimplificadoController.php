@@ -14,7 +14,7 @@ class RegimenSimplificadoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): view
     {
         $regimenes_simplificados = Simplified_regimen::all();
         return view('configsystem.regimenes-simplificados', ['regimenes_simplificados'=>$regimenes_simplificados]);

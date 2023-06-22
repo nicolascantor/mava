@@ -33,13 +33,12 @@ Route::middleware('auth')->group(function () {
 //rutas para la creacion de sedes
 Route::get('create-sede', [SedeController::class, 'create'])
 ->name('create-sede');
-
 Route::post('create-sede', [SedeController::class, 'store']);
+Route::get('sedes', [SedeController::class, 'index']);
 
 //rutas para la creacion de remigenes simlificados
 Route::get('/create-regimensimplificado', [RegimenSimplificadoController::class, 'create'])
 ->name('create-regimensimplificado');
-
 Route::post('create-regimensimplificado', [RegimenSimplificadoController::class, 'store']);
 Route::get('regimensimplificado', [RegimenSimplificadoController::class, 'index']);
 
