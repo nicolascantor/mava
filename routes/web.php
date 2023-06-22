@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegimenSimplificadoController;
 use App\Http\Controllers\SedeController;
+use App\Http\Controllers\ElementoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,15 +32,18 @@ Route::middleware('auth')->group(function () {
 });
 
 //rutas para la creacion de sedes
-Route::get('create-sede', [SedeController::class, 'create'])
-->name('create-sede');
+Route::get('create-sede', [SedeController::class, 'create'])->name('create-sede');
 Route::post('create-sede', [SedeController::class, 'store']);
 Route::get('sedes', [SedeController::class, 'index']);
 
 //rutas para la creacion de remigenes simlificados
-Route::get('/create-regimensimplificado', [RegimenSimplificadoController::class, 'create'])
-->name('create-regimensimplificado');
+Route::get('/create-regimensimplificado', [RegimenSimplificadoController::class, 'create'])->name('create-regimensimplificado');
 Route::post('create-regimensimplificado', [RegimenSimplificadoController::class, 'store']);
 Route::get('regimensimplificado', [RegimenSimplificadoController::class, 'index']);
+
+//rutas para la creacion de elementos
+Route::get('/create-element', [ElementoController::class, 'create'])->name('create-element');
+Route::post('create-element', [ElementoController::class, 'store']);
+Route::get('elements', [ElementoController::class, 'index']);
 
 require __DIR__.'/auth.php';
