@@ -4,5 +4,5 @@
    <option disabled selected>Seleccione una opción</option>
     @foreach ($options as $option)
         <option value="{{$option->id}}">{{$option->nombre}} - {{ $option->nit }}</option>
-   @endforeach
+    @endforeach
 </select>

@@ -71,7 +71,9 @@ class RegimenSimplificadoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $regimen_simplificado = Simplified_regimen::find($id);
+
+        return view('configsystem.edit-regimen-simplificado', ['regimen_simplificado' => $regimen_simplificado]);
     }
 
     /**
@@ -83,7 +85,20 @@ class RegimenSimplificadoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nombre' => ['required','string'],
+            'nit' => ['required','string','unique:simplified_regimens,nit,'.$id]
+        ]);
+
+
+
+        $regimen_simplificado = Simplified_regimen::find($id);
+
+        $regimen_simplificado->nombre = $request->nombre;
+        $regimen_simplificado->nit = $request->nit;
+        $regimen_simplificado->update();
+
+        return redirect('/regimensimplificado');
     }
 
     /**

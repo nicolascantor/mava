@@ -80,7 +80,10 @@ class SedeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $sede = Sede::find($id);
+        $regimenes_simplificados = Simplified_regimen::all();
+
+        return view('configsystem.edit-sede', ['sede' => $sede, 'regimenes_simplificados'=> $regimenes_simplificados]);
     }
 
     /**
@@ -92,7 +95,23 @@ class SedeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nombre' => ['required','string'],
+            'direccion' => ['required','string'],
+            'telefono' => ['required','string'],
+            'ciudad' => ['required','string'],
+            'regimen_simplificado' => ['required']
+        ]);
+
+        $sede = Sede::find($id);
+        $sede->nombre = $request->nombre;
+        $sede->direccion = $request->direccion;
+        $sede->telefono = $request->telefono;
+        $sede->ciudad = $request->ciudad;
+        $sede->regimen_simplificado_id = $request->regimen_simplificado;
+        $sede->save();
+
+        return redirect('/sedes');
     }
 
     /**

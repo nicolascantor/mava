@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/dashboard', function () {
@@ -34,12 +34,16 @@ Route::middleware('auth')->group(function () {
 //rutas para la creacion de sedes
 Route::get('create-sede', [SedeController::class, 'create'])->name('create-sede');
 Route::post('create-sede', [SedeController::class, 'store']);
-Route::get('sedes', [SedeController::class, 'index']);
+Route::get('sedes', [SedeController::class, 'index'])->name('sedes');
+Route::get('sedes/{id}/edit', [SedeController::class, 'edit']);
+Route::put('sedes/{id}/update', [SedeController::class, 'update']);
 
 //rutas para la creacion de remigenes simlificados
 Route::get('/create-regimensimplificado', [RegimenSimplificadoController::class, 'create'])->name('create-regimensimplificado');
 Route::post('create-regimensimplificado', [RegimenSimplificadoController::class, 'store']);
-Route::get('regimensimplificado', [RegimenSimplificadoController::class, 'index']);
+Route::get('regimensimplificado', [RegimenSimplificadoController::class, 'index'])->name('regimensimplificado');
+Route::get('regimensimplificado/{id}/edit', [RegimenSimplificadoController::class, 'edit']);
+Route::put('regimensimplificado/{id}/update', [RegimenSimplificadoController::class, 'update']);
 
 //rutas para la creacion de elementos
 Route::get('/create-element', [ElementoController::class, 'create'])->name('create-element');
