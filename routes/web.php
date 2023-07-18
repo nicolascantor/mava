@@ -5,6 +5,7 @@ use App\Http\Controllers\RegimenSimplificadoController;
 use App\Http\Controllers\SedeController;
 use App\Http\Controllers\ElementoController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,5 +50,12 @@ Route::put('regimensimplificado/{id}/update', [RegimenSimplificadoController::cl
 Route::get('/create-element', [ElementoController::class, 'create'])->name('create-element');
 Route::post('create-element', [ElementoController::class, 'store']);
 Route::get('elements', [ElementoController::class, 'index']);
+
+//rutas para la creacion de usuarios
+Route::get('users', [RegisteredUserController::class, 'index'])
+->name('users');
+
+Route::get('user/{id}/edit', [RegisteredUserController::class, 'edit'])
+->name('edit');
 
 require __DIR__.'/auth.php';
