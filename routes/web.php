@@ -49,13 +49,23 @@ Route::put('regimensimplificado/{id}/update', [RegimenSimplificadoController::cl
 //rutas para la creacion de elementos
 Route::get('/create-element', [ElementoController::class, 'create'])->name('create-element');
 Route::post('create-element', [ElementoController::class, 'store']);
-Route::get('elements', [ElementoController::class, 'index']);
+Route::get('/elementos', [ElementoController::class, 'index'])->name('elementos');
+Route::get('/elemento/{id}/edit', [ElementoController::class, 'edit']);
+Route::put('/elemento/{id}/update', [ElementoController::class, 'update']);
+
+Route::get('/elementos-masivo', [ElementoController::class, 'create_masivo'])->name('elementos-masivo');
+Route::post('/cargue-masivo', [ElementoController::class, 'store_masivo'])->name('cargue-masivo');
+
+
 
 //rutas para la creacion de usuarios
 Route::get('users', [RegisteredUserController::class, 'index'])
 ->name('users');
 
-Route::get('user/{id}/edit', [RegisteredUserController::class, 'edit'])
-->name('edit');
+Route::get('user/{id}/edit', [ProfileController::class, 'editar'])
+->name('editar');
+
+Route::put('user/{id}/actualizar', [ProfileController::class, 'actualizar'])
+->name('actualizar');
 
 require __DIR__.'/auth.php';

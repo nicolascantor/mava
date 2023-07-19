@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Redirect;
 use App\Models\Elemento;
+use Illuminate\Support\Facades\Storage;
+
+
 
 class ElementoController extends Controller
 {
@@ -16,6 +20,9 @@ class ElementoController extends Controller
     public function index()
     {
 
+        return view('configsystem\elementos', [
+            'elementos' => Elemento::all(),
+        ]);
     }
 
     /**
@@ -26,6 +33,11 @@ class ElementoController extends Controller
     public function create(): View
     {
         return view('configsystem.create-elements');
+    }
+
+    public function create_masivo(): View
+    {
+        return view('configsystem.create-elementos-masivo');
     }
 
     /**
@@ -40,20 +52,20 @@ class ElementoController extends Controller
             'referencia' => ['required','string','max:9','min:9', 'unique:elementos,referencia'],
             'nombre' => ['required', 'string'],
             'unidad_medida' => ['string'],
-            'valor_venta_publico' => ['decimal:2'],
-            'valor_venta_sede' => ['decimal:2']
+            'valor_venta_publico' => ['nullable'],
+            'valor_venta_sede' => ['nullable']
         ]);
 
         $elemento = new Elemento;
         $elemento->referencia = strtoupper($request->referencia);
         $elemento->nombre = strtoupper($request->nombre);
-        $elemento->unidad_medida = ($elemento->unidad_medida != null) ? $request->unidad_medida : null;
-        $elemento->valor_venta_publico = ($elemento->valor_venta_publico != null) ? $request->valor_venta_publico : null;
-        $elemento->valor_venta_sede = ($elemento->valor_venta_sede != null) ? $request->valor_venta_sede : null;
+        $elemento->unidad_medida = $request->unidad_medida;
+        $elemento->valor_venta_publico = $request->valor_venta_publico;
+        $elemento->valor_venta_sede = $request->valor_venta_sede;
 
         $elemento->save();
 
-
+        return Redirect::route('elementos');
 
     }
 
@@ -76,7 +88,9 @@ class ElementoController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('configsystem.edit-element', [
+                'elemento' => Elemento::find($id),
+        ]);
     }
 
     /**
@@ -88,7 +102,25 @@ class ElementoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'referencia' => ['required','string','max:9','min:9', 'unique:elementos,referencia,'.$id],
+            'nombre' => ['required', 'string'],
+            'unidad_medida' => ['string'],
+            'valor_venta_publico' => ['nullable'],
+            'valor_venta_sede' => ['nullable']
+        ]);
+
+        $elemento = Elemento::find($id);
+
+        $elemento->referencia = $request->referencia;
+        $elemento->nombre = $request->nombre;
+        $elemento->unidad_medida = $request->unidad_medida;
+        $elemento->valor_venta_publico = $request->valor_venta_publico;
+        $elemento->valor_venta_sede = $request->valor_venta_sede;
+
+        $elemento->save();
+
+        return Redirect::route('elementos');
     }
 
     /**
@@ -100,5 +132,13 @@ class ElementoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function store_masivo(Request $request){
+
+
+        $archivo = $request->file('elementos');
+        dd($archivo);
+
     }
 }
