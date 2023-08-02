@@ -39,6 +39,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $elementos->links() }}
                 @else
                     <span>No existen elementos en la base de datos creados</span>
                 @endif

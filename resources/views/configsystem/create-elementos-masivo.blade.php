@@ -9,14 +9,14 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <form method="POST" action="{{ route('cargue-masivo') }}">
+                    <form method="POST" action="{{ route('cargue-masivo') }}" enctype="multipart/form-data">
                         @csrf
 
                         <!-- Referencia -->
                         <div>
                             <x-input-label for="referencia" :value="__('Por favor cargue el archivo con los elementos nuevos a crear')"/>
-                            <x-text-input id="referencia" class="block mt-1 w-full" type="file" name="elementos"  required />
-                            <x-input-error :messages="$errors->get('referencia')" class="mt-2"/>
+                            <input  class="block mt-1 w-full" type="file" name="elementos" accept=".csv"  required />
+                            <x-input-error :messages="$errors->get('elementos')" class="mt-2"/>
                         </div>
 
                         <div class="flex items-center justify-end mt-4">
