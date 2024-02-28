@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegimenSimplificadoController;
 use App\Http\Controllers\SedeController;
 use App\Http\Controllers\ElementoController;
+use App\Http\Controllers\pedidosController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
 
@@ -56,7 +57,9 @@ Route::put('/elemento/{id}/update', [ElementoController::class, 'update']);
 Route::get('/elementos-masivo', [ElementoController::class, 'create_masivo'])->name('elementos-masivo');
 Route::post('/cargue-masivo', [ElementoController::class, 'store_masivo'])->name('cargue-masivo');
 
-
+//rutas para la creacion de pedidos
+Route::get('pedidos', [pedidosController::class, 'index'])->name('pedidos');
+Route::get('create-order', [pedidosController::class, 'create'])->name('create-order');
 
 //rutas para la creacion de usuarios
 Route::get('users', [RegisteredUserController::class, 'index'])

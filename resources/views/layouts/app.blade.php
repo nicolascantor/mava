@@ -13,6 +13,7 @@
 
      <!-- Scripts -->
      @vite(['resources/css/app.css', 'resources/js/app.js'])
+     @livewireStyles
 </head>
 <body>
     <!--Navegacion panel superior-->
@@ -39,6 +40,7 @@
         </div>
         </div>
     </div>
+    @livewireScripts
 </body>
 <script>
 
