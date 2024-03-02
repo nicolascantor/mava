@@ -5,29 +5,32 @@
 
     <div>
         <div>
+            <div class="flex p-2 text-2xl text-blue-800 justify-center">
+                <span>{{ Auth::user()->nombre }} {{ Auth::user()->apellido }} estos son los pedidos que has realziad para la sede {{ Auth::user()->sede->nombre }}:</span>
+            </div>
             <div class="w-full mb-3">
-                <a href="{{ route('create-order') }}" class="rounded-2xl bg-green-400 p-2 text-white uppercase">
+                <a href="{{ route('create-order') }}" class="rounded-2xl bg-teal-500 p-2 text-white uppercase">
                         <span>Nuevo pedido</span>
                 </a>
             </div>
             <div class="w-full mt-7">
                 @if(count($pedidos)>0)
-                    <table class="table-auto rounded-lg border-collapse border border-slate-500 w-full">
+                    <table class="table-fixed w-full">
                         <thead>
                             <tr class="bg-gray-200">
-                                <th class="border border-slate-600 ...">No</th>
-                                <th class="border border-slate-600 ...">Fecha</th>
-                                <th class="border border-slate-600 ...">Estado</th>
-                                <th class="border border-slate-600 ...">Ver Detalles</th>
+                                <th class="border border-slate-400 ...">No</th>
+                                <th class="border border-slate-400 ...">Fecha</th>
+                                <th class="border border-slate-400 ...">Estado</th>
+                                <th class="border border-slate-400 ...">Ver Detalles</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($pedidos as $pedido)
                                 <tr>
-                                    <td class="border border-slate-700 pl-1 pr-1">{{ $pedido->id }} </td>
-                                    <td class="border border-slate-700 pl-1 pr-1">{{ $pedido->fecha }}</td>
-                                    <td class="border border-slate-700 pl-1 pr-1">{{ $pedido->estado }}</td>
-                                    <td class="border border-slate-700 pl-1 pr-1"><a href="#" class="bg-amber-300 text-white w-full">Editar</a></td>
+                                    <td class="border border-slate-400 pl-1 pr-1">{{ $pedido->id }} </td>
+                                    <td class="border border-slate-400 pl-1 pr-1">{{ $pedido->fecha }}</td>
+                                    <td class="border border-slate-400 pl-1 pr-1 justify-center">{{ $pedido->estado }}</td>
+                                    <td class="flex border border-slate-400 content-center justify-center p-0 m-0"><a href="#" class="w-full p-0 m-0 bg-teal-400 text-blue-900 text-center hover:bg-teal-500">Ver detalles</a></td>
                                 </tr>
                             @endforeach
                         </tbody>

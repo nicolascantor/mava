@@ -35,9 +35,19 @@
                 </tr>
                 @endforeach
                 @else
-            <h1>Por favor selecciones uno o varios elementos a pedir</h1>
-            @endif
+                <h1>Por favor selecciones uno o varios elementos a pedir</h1>
+                @endif
             </tbody>
         </table>
+        <div class="flex flex-col mt-28">
+            <div class="w-full border-b-2 border-teal-400 mb-3"></div>
+            <div class="flex flex-col w-full">
+                <label class="text-gray-400" for="observacionesGenerales" >Observaciones generales del pedido:</label>
+                <input class="rounded-lg border-gray-300 focus:border-teal-400 focus:ring-1 focus:teal-sky-500 placeholder:text-gray-300" type="text" name="observacionesGenerales" wire:model="observacionesGenerales" placeholder="Observaciones generales del pedido">
+            </div>
+            <div class="w-full justify-center pt-5">
+                <button class="bg-teal-400 hover:bg-teal-600 text-white text-center font-serif p-2 rounded-lg" wire:click="save()">Enviar pedido</button>
+            </div>
+        </div>
     </div>
 </div>

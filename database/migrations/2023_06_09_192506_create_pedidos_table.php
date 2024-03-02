@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->dateTime('fecha');
             $table->enum('estado',['enviado','revisado','alistamiento','despacho','despachado']);
+            $table->string('observaciones')->nullable();
             $table->unsignedBigInteger('usuario_id');
             $table->foreign('usuario_id')->references('id')->on('users');
             $table->timestamps();

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('elemento_id');
             $table->foreign('elemento_id')->references('id')->on('elementos');
             $table->double('cantidad', 10, 2);
+            $table->string('observacion')->nullable();
             $table->timestamps();
         });
     }

@@ -1,5 +1,5 @@
 <div>
-     <button class="border-green-950 bg-green-300 p-1 px-2 rounded-md text-white hover:bg-green-500" wire:click="$set('open', false)">Ver elementos</button>
+     <button class="border-green-950 bg-teal-400 p-1 px-2 rounded-md text-white hover:bg-teal-500" wire:click="$set('open', false)">Ver elementos</button>
      <div class="relative z-50 @if($open) hidden @endif" aria-labelledby="modal-title" role="dialog" aria-modal="true" >
         <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
 
@@ -68,7 +68,7 @@
                     <div class="flex flex-col">
                       <div class="mt-2 flex flex-row w-full h-5/6 justify-end">
                         <div class="px-4 py-4 sm:flex sm:flex-row-reverse">
-                            <button type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-red-200 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-400 sm:mt-0 sm:w-auto" wire:click="atras()">Atras</button>
+                            <button type="button" class="mt-3 inline-flex w-full justify-center rounded-md bg-red-300 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:mt-0 sm:w-auto" wire:click="atras()">Atras</button>
                         </div>
                         <div class="">
                             <span class="w-1/4">Cantidad a pedir:</span>
