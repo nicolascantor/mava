@@ -15,7 +15,7 @@
                         <!-- Referencia -->
                         <div>
                             <x-input-label for="referencia" :value="__('Por favor cargue el archivo con los elementos nuevos a crear')"/>
-                            <input  class="block mt-1 w-full" type="file" name="elementos" accept=".csv"  required />
+                            <input  class="block mt-1 w-full" type="file" name="elementos" accept=".xlsx"  required />
                             <x-input-error :messages="$errors->get('elementos')" class="mt-2"/>
                         </div>
 

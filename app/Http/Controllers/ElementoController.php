@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\View\View;
-use Illuminate\Support\Facades\Redirect;
 use App\Models\Elemento;
+use App\Imports\ElementImport;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\File;
-use App\Services\FileServices;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
+use Maatwebsite\Excel\Facades\Excel;
+
+
 
 
 
@@ -140,26 +143,12 @@ class ElementoController extends Controller
     public function store_masivo(Request $request){
 
         $request->validate([
-            'elementos' => ['required','file','mimes:csv,txt'],
+            'elementos' => ['required','file','mimes:xlsx'],
         ]);
 
         $file = $request->file('elementos');
-        $body = New FileServices;
-        $body->procesorData($file);
-        dd($body);
 
-        /*foreach($body as $item){
-            $exist = DB::table('elementos')->where('referencia', $item[0])->exists();
-            if(!$exist){
-                $elemento = new Elemento;
-                $elemento->referencia = strtoupper($item[0]);
-                $elemento->nombre = strtoupper($item[1]);
-                $elemento->unidad_medida = $item[2];
-                $elemento->valor_venta_publico = ($item[3]>0) ? $item[3] : 0;
-                $elemento->valor_venta_sede = ($item[4]>0) ? $item[4] : 0;
-                $elemento->save();
-            }
-        }*/
+        Excel::import(new ElementImport, $file);
 
         return Redirect::route('elementos');
     }

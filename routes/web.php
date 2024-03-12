@@ -63,10 +63,8 @@ Route::middleware('auth')->group(function () {
     //rutas para la creacion de usuarios
     Route::get('users', [RegisteredUserController::class, 'index'])
     ->name('users');
-
     Route::get('user/{id}/edit', [ProfileController::class, 'editar'])
     ->name('editar');
-
     Route::put('user/{id}/actualizar', [ProfileController::class, 'actualizar'])
     ->name('actualizar');
 });
