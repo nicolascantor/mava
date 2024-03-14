@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -14,12 +15,12 @@ class SendOrderMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $user;
+    public User $user;
     public $subject;
     /**
      * Create a new message instance.
      */
-    public function __construct($user, $subject)
+    public function __construct(User $user, $subject)
     {
         $this->user = $user;
         $this->subject = $subject;

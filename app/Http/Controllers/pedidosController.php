@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\Pedido_has_elemento;
 use App\Models\Pedido;
 
 class pedidosController extends Controller
@@ -27,6 +27,13 @@ class pedidosController extends Controller
     public function create()
     {
         return view('pedidos.create-order');
+    }
+
+    public function show(Pedido $pedido){
+        $elementos = Pedido_has_elemento::where('pedido_id',$pedido->id)->get();
+
+        return view('pedidos.show-order', ['elementos' => $elementos, 'pedido' => $pedido]);
+
     }
 
 }

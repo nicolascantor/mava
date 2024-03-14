@@ -59,6 +59,7 @@ Route::middleware('auth')->group(function () {
     //rutas para la creacion de pedidos
     Route::get('pedidos', [pedidosController::class, 'index'])->name('pedidos');
     Route::get('create-order', [pedidosController::class, 'create'])->name('create-order');
+    Route::get('show-order/{pedido}', [pedidosController::class, 'show'])->name('show-order');
 
     //rutas para la creacion de usuarios
     Route::get('users', [RegisteredUserController::class, 'index'])

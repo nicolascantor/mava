@@ -67,7 +67,9 @@ class CreateOrder extends Component
 
             $this->reset('observacionesGenerales');
 
-            $response = Mail::to('nicolascantor103@gmail.com')->send(new SendOrderMail(Auth::user()->nombre, 'Mensaje de prueba'));
+            //$response = Mail::to('nicolascantor103@gmail.com')->send(new SendOrderMail(Auth::user(), 'Mensaje de prueba'));
+
+            return redirect('pedidos');
         }else{
 
         }

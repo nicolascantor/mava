@@ -30,7 +30,7 @@
                                     <td class="border border-slate-400 pl-1 pr-1">{{ $pedido->id }} </td>
                                     <td class="border border-slate-400 pl-1 pr-1">{{ $pedido->fecha }}</td>
                                     <td class="border border-slate-400 pl-1 pr-1 justify-center">{{ $pedido->estado }}</td>
-                                    <td class="flex border border-slate-400 content-center justify-center p-0 m-0"><a href="#" class="w-full p-0 m-0 bg-teal-400 text-blue-900 text-center hover:bg-teal-500">Ver detalles</a></td>
+                                    <td class="flex border border-slate-400 content-center justify-center p-0 m-0"><a href="{{ route('show-order',['pedido' => $pedido]) }}" class="w-full p-0 m-0 bg-teal-400 text-blue-900 text-center hover:bg-teal-500">Ver detalles</a></td>
                                 </tr>
                             @endforeach
                         </tbody>
