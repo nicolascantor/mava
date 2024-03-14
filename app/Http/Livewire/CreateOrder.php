@@ -6,10 +6,13 @@ use Livewire\Component;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 use App\Models\Elemento;
 use App\Models\Pedido;
 use App\Models\Pedido_has_elemento;
+use App\Mail\SendOrderMail;
+
 
 
 class CreateOrder extends Component
@@ -63,6 +66,8 @@ class CreateOrder extends Component
             }
 
             $this->reset('observacionesGenerales');
+
+            $response = Mail::to('nicolascantor103@gmail.com')->send(new SendOrderMail(Auth::user()->nombre, 'Mensaje de prueba'));
         }else{
 
         }

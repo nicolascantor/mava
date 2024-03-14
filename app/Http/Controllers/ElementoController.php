@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Elemento;
 use App\Imports\ElementImport;
+use App\Mail\SendOrderMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -11,6 +12,8 @@ use Illuminate\Validation\Rules\File;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -76,17 +79,6 @@ class ElementoController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -129,16 +121,6 @@ class ElementoController extends Controller
         return Redirect::route('elementos');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 
     public function store_masivo(Request $request){
 
@@ -148,8 +130,12 @@ class ElementoController extends Controller
 
         $file = $request->file('elementos');
 
-        Excel::import(new ElementImport, $file);
+        $import = new ElementImport();
+        $import->import($file);
 
-        return Redirect::route('elementos');
+
+        return view('configsystem.create-elementos-masivo',[
+            'failures' => $import->failures(),
+        ]);
     }
 }

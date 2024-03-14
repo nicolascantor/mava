@@ -26,6 +26,21 @@
                         </div>
                     </form>
                 </div>
+                <div class="p-6 text-gray-900">
+                    @if(isset($failures))
+                        @foreach ($failures as $failure)
+                            {{ $failure->row() }}
+                            {{   $failure->attribute()}}
+                            @foreach ($failure->errors() as $error)
+                                {{ $error }}
+                            @endforeach
+                            @foreach ($failure->values() as $value)
+                                {{ $value }}
+                            @endforeach
+                            <br>
+                        @endforeach
+                    @endif
+                </div>
             </div>
         </div>
     </div>
