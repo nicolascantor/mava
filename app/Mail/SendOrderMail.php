@@ -10,20 +10,22 @@ use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Contracts\Mail\Attachable;
+use Illuminate\Mail\Mailables\Attachment;
 
 class SendOrderMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public User $user;
-    public $subject;
+    public $data;
     /**
      * Create a new message instance.
      */
-    public function __construct(User $user, $subject)
+    public function __construct($data)
     {
-        $this->user = $user;
-        $this->subject = $subject;
+        $this->data = $data;
+
     }
 
     /**
@@ -32,8 +34,8 @@ class SendOrderMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('norepply@grupomeicol.co', $this->user),
-            subject: $this->subject,
+            from: new Address('norepply@grupomeicol.co', 'MEICOL Sede: '. $this->data['sede']),
+            subject: "NUEVO PEDIDO DE SEDE",
         );
     }
 
@@ -45,18 +47,19 @@ class SendOrderMail extends Mailable
         return new Content(
             view: 'mails.sendOrderMail',
             with: [
-                'usuario' => $this->user,
+                'nombre' => $this->data['nombre'],
+                'apellido' => $this->data['apellido'],
+                'sede' => $this->data['sede'],
+
             ]
         );
     }
 
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
     public function attachments(): array
     {
-        return [];
+        return [
+            Attachment::fromPath(storage_path('app/'.$this->data['attachment'])),
+        ];
     }
+
 }

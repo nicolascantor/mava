@@ -5,6 +5,7 @@
         </div>
         <div>
             <livewire:show-elemento>
+            <livewire:show-loading-create-order>
         </div>
     </div>
     <div>

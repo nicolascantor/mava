@@ -7,11 +7,13 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\OrderExport;
 use App\Models\Elemento;
 use App\Models\Pedido;
 use App\Models\Pedido_has_elemento;
 use App\Mail\SendOrderMail;
+use Illuminate\Support\Facades\Storage;
 
 
 
@@ -30,13 +32,17 @@ class CreateOrder extends Component
     public function elementAdd($elemento){
         //dd($elemento['items']['id']);
         $this->emit('closeModal');
-        $this->elementosSeleccionados->push([
-            'id' => $elemento['items']['id'],
-            'referencia' => $elemento['items']['referencia'],
-            'nombre' => $elemento['items']['nombre'],
-            'cantidad' => $elemento['items']['cantidad'],
-            'observacion' => $elemento['items']['observacion']
-        ]);
+        if(!$this->elementosSeleccionados->contains($elemento['items']['id'])){
+
+            $this->elementosSeleccionados->push([
+                'id' => $elemento['items']['id'],
+                'referencia' => $elemento['items']['referencia'],
+                'nombre' => $elemento['items']['nombre'],
+                'cantidad' => $elemento['items']['cantidad'],
+                'observacion' => $elemento['items']['observacion']
+            ]);
+        }
+
     }
 
     public function deleteElement($key){
@@ -44,6 +50,8 @@ class CreateOrder extends Component
     }
 
     public function save(){
+
+        $this->emit('showLoading');
 
         if(!$this->elementosSeleccionados->isEmpty()){
 
@@ -67,7 +75,20 @@ class CreateOrder extends Component
 
             $this->reset('observacionesGenerales');
 
-            //$response = Mail::to('nicolascantor103@gmail.com')->send(new SendOrderMail(Auth::user(), 'Mensaje de prueba'));
+            $fileNameStorage ='Pedido'. $pedido->id;
+            Excel::store(new OrderExport($pedido), $fileNameStorage.'.xlsx');
+
+            $data = [
+                'nombre' => Auth::user()->nombre,
+                'apellido' => Auth::user()->apellido,
+                'sede' => Auth::user()->sede->nombre,
+                'attachment' => $fileNameStorage.'.xlsx',
+
+            ];
+
+            $response = Mail::to('nicolascantor103@gmail.com')->send(new SendOrderMail($data));
+
+            Storage::delete($fileNameStorage.'.xlsx');
 
             return redirect('pedidos');
         }else{

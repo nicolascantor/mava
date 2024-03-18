@@ -1,9 +1,9 @@
 <div>
     Fecha: hoy
     <br>
-    Remitente: {{ $usuario->nombre }} {{ $usuario->apellido }}
+    Remitente: {{ $nombre }} {{ $apellido }}
     <br>
-    Sede: {{ $usuario->sede->nombre }}
+    Sede: {{ $sede }}
     <br>
     En hora buena, !!Te han enviado un nuevo pedido!!
     <br>

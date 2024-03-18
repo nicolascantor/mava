@@ -60,6 +60,7 @@ Route::middleware('auth')->group(function () {
     Route::get('pedidos', [pedidosController::class, 'index'])->name('pedidos');
     Route::get('create-order', [pedidosController::class, 'create'])->name('create-order');
     Route::get('show-order/{pedido}', [pedidosController::class, 'show'])->name('show-order');
+    Route::get('order/export/{pedido}', [pedidosController::class, 'exportExcel'])->name('export-excel');
 
     //rutas para la creacion de usuarios
     Route::get('users', [RegisteredUserController::class, 'index'])

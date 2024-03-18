@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Exports\OrderExport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Pedido_has_elemento;
 use App\Models\Pedido;
 
@@ -16,7 +18,7 @@ class pedidosController extends Controller
      */
     public function index()
     {
-        return view('pedidos.pedidos',['pedidos' => Pedido::where('usuario_id', Auth::id())->paginate(10)]);
+        return view('pedidos.pedidos',['pedidos' => Pedido::where('usuario_id', Auth::id())->orderByDesc('id')->paginate(20)]);
     }
 
     /**
@@ -33,6 +35,11 @@ class pedidosController extends Controller
         $elementos = Pedido_has_elemento::where('pedido_id',$pedido->id)->get();
 
         return view('pedidos.show-order', ['elementos' => $elementos, 'pedido' => $pedido]);
+
+    }
+
+    public function exportExcel(Pedido $pedido){
+        return Excel::download(new OrderExport($pedido), 'Pedido.xlsx');
 
     }
 

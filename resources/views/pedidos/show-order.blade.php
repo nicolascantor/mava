@@ -36,8 +36,8 @@
                         </tbody>
                     </table>
                     <div class="flex flex-row w-full justify-center pt-3">
-                        <button class="bg-red-500 p-1 hover:bg-red-600 rounded-lg mx-2 text-white">Decargar PDF</button>
-                        <button class="bg-green-500 p-1 hover:bg-green-600 rounded-lg text-white">Descargar Excel</button>
+                        <a href="{{ route('export-excel',[$pedido]) }}" class="bg-red-500 p-1 hover:bg-red-600 rounded-lg mx-2 text-white">Decargar PDF</a>
+                        <a href="{{ route('export-excel',[$pedido]) }}" class="bg-green-500 p-1 hover:bg-green-600 rounded-lg text-white">Descargar Excel</a>
                     </div>
             </div>
         </div>
