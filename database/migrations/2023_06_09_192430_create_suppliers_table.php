@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('elementos', function (Blueprint $table) {
+        Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
-            $table->string('referencia')->unique();
             $table->string('nombre');
-            $table->string('unidad_medida')->nullable();
-            $table->double('valor_venta_publico', 15, 2)->nullable();
-            $table->double('valor_venta_sede', 15, 2)->nullable();
-            $table->unsignedBigInteger('supplier_id');
-            $table->foreign('supplier_id')->references('id')->on('suppliers');
+            $table->enum('tipo_documento',['nit', 'cc']);
+            $table->string('numero_documento')->unique();
+            $table->string('direccion');
+            $table->string('celular');
+            $table->string('ciudad');
+            $table->string('email');
             $table->timestamps();
         });
     }
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('elementos');
+        Schema::dropIfExists('suppliers');
     }
 };

@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Storage;
 
 class CreateOrder extends Component
 {
-    protected $listeners = ['elementAdd'];
+    protected $listeners = ['elementAdd','store'];
 
     public $elementosSeleccionados = [];
     public $observacionesGenerales = null;
@@ -50,9 +50,10 @@ class CreateOrder extends Component
     }
 
     public function save(){
-
         $this->emit('showLoading');
+    }
 
+    public function store(){
         if(!$this->elementosSeleccionados->isEmpty()){
 
             $pedido = new Pedido();
@@ -94,8 +95,6 @@ class CreateOrder extends Component
         }else{
 
         }
-
-
     }
 
     public function render()

@@ -13,6 +13,8 @@ class ShowLoadingCreateOrder extends Component
 
     public function showLoading(){
         $this->creando = false;
+        $this->emit('store');
+
     }
 
     public function render()
